@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import MenuBar from './components/MenuBar';
+import Footer from './components/Footer';
 
 const API_URL = 'https://vortex-engine.onrender.com/main';
 
@@ -45,6 +46,7 @@ function App() {
           </div>
         )}
       </div>
+      <Footer />
     </>
   );
 }
