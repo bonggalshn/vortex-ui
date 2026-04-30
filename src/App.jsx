@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import MenuBar from './components/MenuBar';
+import Footer from './components/Footer';
 
-/**
- * API endpoint for fetching quote data.
- * @constant {string}
- */
 const API_URL = 'https://vortex-engine.onrender.com/main';
 
-/**
- * App component - Main application container.
- * Displays VORTEX title and fetches dynamic quote from API.
- * @returns {JSX.Element}
- */
 function App() {
   const [quote, setQuote] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  /**
-   * Fetches quote data from the VORTEX API.
-   * Updates state based on API response.
-   * @async
-   * @returns {Promise<void>}
-   */
   useEffect(() => {
     const fetchQuote = async () => {
       try {
@@ -49,14 +36,18 @@ function App() {
   }, []);
 
   return (
-    <div className="app-container">
-      <h1 className="title">VORTEX</h1>
-      {!isLoading && !hasError && quote && (
-        <div className="quote-container">
-          <p className="quote-text">{quote}</p>
-        </div>
-      )}
-    </div>
+    <>
+      <MenuBar />
+      <div className="app-container">
+        <h1 className="title">VORTEX</h1>
+        {!isLoading && !hasError && quote && (
+          <div className="quote-container">
+            <p className="quote-text">{quote}</p>
+          </div>
+        )}
+      </div>
+      <Footer />
+    </>
   );
 }
 
