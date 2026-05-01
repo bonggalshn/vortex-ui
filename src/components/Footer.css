@@ -1,0 +1,18 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: rgba(10, 10, 15, 0.95);
+  border-top: 1px solid rgba(0, 255, 136, 0.2);
+  text-align: center;
+  z-index: 1000;
+}
+
+.footer p {
+  color: #00ff88;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
