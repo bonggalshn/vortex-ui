@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './MenuBar.css';
 
-export default function MenuBar() {
+
+export default function MenuBar({ onShowRegister }) {
   const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -42,7 +43,7 @@ export default function MenuBar() {
         ) : (
           <>
             <button className="auth-button">Login</button>
-            <button className="auth-button signup">Sign Up</button>
+            <button className="auth-button signup" onClick={onShowRegister}>Sign Up</button>
           </>
         )}
       </div>
