@@ -25,6 +25,9 @@ Dark tech / cyberpunk hacker aesthetic. Keep this in mind when modifying CSS/col
 
 ## Notes
 
-- External API: `https://vortex-engine.onrender.com/main` (may be unavailable)
+- Main backend: `https://vortex-engine.onrender.com`
+  - `/main` - home page
+  - `/login` - login
+  - `/register` - register
 - No lint/typecheck/test scripts configured
 - Build output in `dist/`
