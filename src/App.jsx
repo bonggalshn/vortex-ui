@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+
 import MenuBar from './components/MenuBar';
 import Footer from './components/Footer';
+import RegisterForm from './components/RegisterForm';
+import LoginForm from './components/LoginForm';
 
 const API_URL = 'https://vortex-engine.onrender.com/main';
 
@@ -8,6 +11,8 @@ function App() {
   const [quote, setQuote] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     const fetchQuote = async () => {
@@ -37,13 +42,24 @@ function App() {
 
   return (
     <>
-      <MenuBar />
+      <MenuBar onShowRegister={() => setShowRegister(true)} onShowLogin={() => setShowLogin(true)} />
       <div className="app-container">
         <h1 className="title">VORTEX</h1>
-        {!isLoading && !hasError && quote && (
-          <div className="quote-container">
-            <p className="quote-text">{quote}</p>
-          </div>
+        {showLogin ? (
+          <LoginForm
+            onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }}
+            onClose={() => setShowLogin(false)}
+          />
+        ) : showRegister ? (
+          <RegisterForm
+            onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }}
+          />
+        ) : (
+          !isLoading && !hasError && quote && (
+            <div className="quote-container">
+              <p className="quote-text">{quote}</p>
+            </div>
+          )
         )}
       </div>
       <Footer />

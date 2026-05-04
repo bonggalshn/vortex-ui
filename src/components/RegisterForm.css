@@ -1,0 +1,95 @@
+.register-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(10, 10, 20, 0.98);
+  border-radius: 10px;
+  box-shadow: 0 0 24px #00ffea44, 0 0 4px #00ff88;
+  font-family: 'Courier New', Courier, monospace;
+  color: #00ffea;
+  border: 1.5px solid #00ff88;
+}
+.register-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #00ff88;
+  text-shadow: 0 0 8px #00ff88, 0 0 2px #00ffea;
+  letter-spacing: 0.1em;
+}
+.register-container form > div {
+  margin-bottom: 1.2rem;
+}
+.register-container label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #00ffea;
+  text-shadow: 0 0 2px #00ff88;
+}
+.register-container input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1.5px solid #00ff88;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: #181828;
+  color: #00ffea;
+  outline: none;
+  box-shadow: 0 0 8px #00ff8844 inset;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.register-container input:focus {
+  border-color: #00ffea;
+  box-shadow: 0 0 12px #00ffea88;
+}
+.register-container .error {
+  color: #ff2e63;
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+  display: block;
+  text-shadow: 0 0 2px #ff2e63;
+}
+.register-container .success-message {
+  color: #00ff88;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 8px #00ff88;
+}
+.register-container button[type="submit"] {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(90deg, #00ff88 0%, #00ffea 100%);
+  color: #0a0a0f;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 0 0 12px #00ff8844;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.register-container button[type="submit"]:hover {
+  background: linear-gradient(90deg, #00ffea 0%, #00ff88 100%);
+  color: #181828;
+  box-shadow: 0 0 24px #00ffea88;
+}
+.register-container .switch-form {
+  text-align: center;
+  margin-top: 1rem;
+  color: #00ffea;
+}
+.register-container .switch-form button {
+  background: none;
+  border: none;
+  color: #00ff88;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+  padding: 0;
+  margin-left: 0.3rem;
+}
