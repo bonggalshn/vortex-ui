@@ -15,7 +15,7 @@ src/
 ├── main.jsx          # Entry point
 ├── App.jsx           # Main component, fetches from external API
 ├── App.css
-├── components/       # MenuBar, Footer, RegisterForm
+├── components/       # MenuBar, Footer, RegisterForm, LoginForm
 └── context/         # AuthContext (authentication state)
 ```
 

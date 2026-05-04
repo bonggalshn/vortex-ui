@@ -1,8 +1,12 @@
 
 import './RegisterForm.css';
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
-function RegisterForm() {
+const API_URL = 'https://vortex-engine.onrender.com';
+
+function RegisterForm({ onSwitchToLogin }) {
+  const { login } = useAuth();
   const [form, setForm] = useState({
     username: '',
     password: '',
@@ -11,6 +15,7 @@ function RegisterForm() {
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,13 +30,34 @@ function RegisterForm() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
-    if (Object.keys(validationErrors).length === 0) {
+    if (Object.keys(validationErrors).length > 0) return;
+
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${API_URL}/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: form.username,
+          password: form.password,
+          email: form.email || undefined
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
+
+      await login(form.username, form.password);
       setSubmitted(true);
-      // TODO: Add API call here
+    } catch (err) {
+      setErrors({ submit: err.message || 'Registration failed' });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -84,7 +110,16 @@ function RegisterForm() {
               onChange={handleChange}
             />
           </div>
-          <button type="submit">Register</button>
+          {errors.submit && <span className="error">{errors.submit}</span>}
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Registering...' : 'Register'}
+          </button>
+          <p className="switch-form">
+            Already have an account?{' '}
+            <button type="button" onClick={onSwitchToLogin}>
+              Login
+            </button>
+          </p>
         </form>
       )}
     </div>
