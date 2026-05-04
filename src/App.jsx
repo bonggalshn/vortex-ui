@@ -1,53 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import MenuBar from './components/MenuBar';
 import Footer from './components/Footer';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import { AuthProvider } from './context/AuthContext';
 
-const API_URL = 'https://vortex-engine.onrender.com/main';
+function Home() {
+  return (
+    <div className="app-container">
+      <h1 className="title">VORTEX</h1>
+    </div>
+  );
+}
 
 function App() {
-  const [quote, setQuote] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
+  const [page, setPage] = useState('home');
 
-  useEffect(() => {
-    const fetchQuote = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch(API_URL);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        if (data.responseMessage) {
-          setQuote(data.responseMessage);
-        }
-      } catch (error) {
-        console.error('Failed to fetch quote:', error);
-        setHasError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchQuote();
-  }, []);
+  const navigate = (pageName) => {
+    setPage(pageName);
+  };
 
   return (
-    <>
-      <MenuBar />
-      <div className="app-container">
-        <h1 className="title">VORTEX</h1>
-        {!isLoading && !hasError && quote && (
-          <div className="quote-container">
-            <p className="quote-text">{quote}</p>
-          </div>
-        )}
-      </div>
+    <AuthProvider>
+      <MenuBar navigate={navigate} />
+      {page === 'home' && <Home />}
+      {page === 'register' && <Register navigate={navigate} />}
+      {page === 'login' && <Login navigate={navigate} />}
       <Footer />
-    </>
+    </AuthProvider>
   );
 }
 

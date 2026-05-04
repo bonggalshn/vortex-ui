@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './MenuBar.css';
 
-export default function MenuBar() {
+export default function MenuBar({ navigate }) {
   const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -17,10 +17,16 @@ export default function MenuBar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const handleLogout = () => {
+    logout();
+    setDropdownOpen(false);
+    navigate('home');
+  };
+
   return (
     <nav className="menu-bar">
       <div className="menu-left">
-        <a href="/" className="menu-item">Home</a>
+        <button onClick={() => navigate('home')} className="menu-item">Home</button>
       </div>
       <div className="menu-right">
         {user ? (
@@ -33,7 +39,7 @@ export default function MenuBar() {
             </button>
             {dropdownOpen && (
               <div className="dropdown-menu">
-                <button onClick={logout} className="dropdown-item">
+                <button onClick={handleLogout} className="dropdown-item">
                   Logout
                 </button>
               </div>
@@ -41,8 +47,8 @@ export default function MenuBar() {
           </div>
         ) : (
           <>
-            <button className="auth-button">Login</button>
-            <button className="auth-button signup">Sign Up</button>
+            <button onClick={() => navigate('login')} className="auth-button">Login</button>
+            <button onClick={() => navigate('register')} className="auth-button signup">Sign Up</button>
           </>
         )}
       </div>

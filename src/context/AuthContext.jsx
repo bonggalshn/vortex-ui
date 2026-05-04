@@ -1,12 +1,19 @@
 import { createContext, useContext, useState } from 'react';
+import { register as registerApi, login as loginApi } from '../api/auth';
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const login = (username) => {
-    setUser({ username });
+  const login = async (username, password) => {
+    const data = await loginApi({ username, password });
+    setUser({ username, token: data.token });
+    return data;
+  };
+
+  const register = async (userData) => {
+    return await registerApi(userData);
   };
 
   const logout = () => {
@@ -14,7 +21,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
